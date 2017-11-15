@@ -2,19 +2,36 @@ package kafka.fun;
 
 import kafka.fun.clients.consumer.Consumer;
 
+import java.util.Random;
+
 /**
  * Created by ALEJANDRO on 09/11/2017.
  */
 public class StreamApp {
 
     public static void main(String args[]){
-        String servers = args[0];
-        String groupId = args[1];
-        String inTopic = args[2];
-        String goodTopic = args[3];
 
+        String servers = "localhost:9092";
+        String groupId = "ulp-ch03-3.3";
+        String inTopic = "raw-events";
+        String goodTopic = "eventos-prueba";
+
+        //Consumer consumer = new Consumer(servers, groupId, inTopic);
+        PassthruProducer producer = new PassthruProducer(
+                servers, goodTopic);
+        //consumer.run(producer);
+
+        Random random = new Random();
+
+        while(true){
+            producer.process("--- mensaje prueba: " + random.nextInt());
+        }
+
+
+        /**
         Consumer consumer = new Consumer(servers,groupId,inTopic);
-        PassthruProducer producer = new PassthruProducer(servers,goodTopic);
+        FullProducer producer = new FullProducer(servers,goodTopic,inTopic);
         consumer.run(producer);
+         */
     }
 }

@@ -17,6 +17,8 @@ public class PassthruProducer implements IProducer {
     }
 
     public void process(String message){
+
+        System.out.println("--- escribiendo el evento: " + message);
         IProducer.write(this.producer, this.topic, message);
     }
 }
