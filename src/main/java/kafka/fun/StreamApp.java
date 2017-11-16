@@ -23,9 +23,17 @@ public class StreamApp {
 
         Random random = new Random();
 
-        while(true){
-            producer.process("--- mensaje prueba: " + random.nextInt());
+
+        for(int i =  0; i<1000000 ; i++){
+            producer.process("---mensaje prueba:" + random.nextInt());
         }
+
+        /**
+        while(true){
+            producer.process("---mensaje prueba:" + random.nextInt());
+        }
+         */
+
 
 
         /**
