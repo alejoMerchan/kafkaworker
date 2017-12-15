@@ -25,7 +25,7 @@ public class StreamApp {
 
 
         for(int i =  0; i<1000000 ; i++){
-            producer.process("---mensaje prueba:" + random.nextInt());
+            producer.process(generateMsg());
         }
 
         /**
@@ -41,5 +41,11 @@ public class StreamApp {
         FullProducer producer = new FullProducer(servers,goodTopic,inTopic);
         consumer.run(producer);
          */
+    }
+
+    private static String generateMsg(){
+        Random random = new Random();
+        String mensajeBase = "{ \"event\": \"CALCULAR_PAGO\", \"persona\": { \"id\": \""+ random.nextInt() +"\", \"name\": \"Da-"+random.nextInt()+"\" }, \"deducciones\": { \"sueldo\": \""+random.nextInt()+"\", \"regla\":\""+random.nextInt(2)+"\" } } ";
+        return mensajeBase;
     }
 }
